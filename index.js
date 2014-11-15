@@ -1,6 +1,7 @@
 var Hapi = require('hapi');
+var Good = require('good');
 var Data = require('./lib/data');
-var Routes = require('./lib/routes');
+var Nodevember = require('./lib');
 
 var server = new Hapi.Server(8080);
 
@@ -15,8 +16,6 @@ server.ext('onRequest', function (req, next) {
     console.log(req.raw.req.url);
     next();
 });
-
-server.route(Routes);
 
 var data = new Data();
 data.start(function (err) {
@@ -36,9 +35,29 @@ data.start(function (err) {
     ];
 
     server.method(methods);
-    server.start(function () {
 
-        console.log('WHAT HAVE WE DONE!?');
-        console.log('http://localhost:' + server.info.port);
+    server.pack.register({ plugin: Good, options: {
+        reporters: [{
+            reporter: require('good-console'),
+            args:[{ log: '*', request: '*' }]
+        }]
+    }}, function (err) {
+
+        if (err) {
+            console.error(err);
+        }
+
+        server.pack.register(Nodevember, function (err) {
+
+            if (err) {
+                console.error(err);
+            }
+
+            server.start(function () {
+
+                console.log('WHAT HAVE WE DONE!?');
+                console.log('http://localhost:' + server.info.port);
+            });
+        });
     });
 });

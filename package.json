@@ -19,6 +19,8 @@
   "homepage": "https://github.com/hapijs/nodevember",
   "dependencies": {
     "code": "^1.2.1",
+    "good": "^4.0.0",
+    "good-console": "^2.0.1",
     "handlebars": "^2.0.0",
     "hapi": "^7.5.2",
     "hoek": "^2.9.0",

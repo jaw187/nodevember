@@ -19,6 +19,7 @@
   "homepage": "https://github.com/hapijs/nodevember",
   "dependencies": {
     "code": "^1.2.1",
+    "handlebars": "^2.0.0",
     "hapi": "^7.5.2",
     "lab": "^5.0.2",
     "mongodb": "^1.4.20"

@@ -1,36 +1,28 @@
-## Request lifecycle
+## File handlers
 
-Each incoming request passes through a pre-defined set of steps, along with optional extensions:
+### `reply.file(path, [options])`
 
-- **`'onRequest'`** extension point
-    - always called
-    - the `request` object passed to the extension functions is decorated with the `request.setUrl(url)` and `request.setMethod(verb)` methods. Calls to these methods
-      will impact how the request is routed and can be used for rewrite rules.
-    - `request.route` is not yet populated as the router only looks at the request after this point.
-- Lookup route using request path
-- Parse cookies
-- **`'onPreAuth'`** extension point
-- Authenticate request
-- Read and parse payload
-- Authenticate request payload
-- **`'onPostAuth'`** extension point
-- Validate path parameters
-- Process query extensions (e.g. JSONP)
-- Validate query
-- Validate payload
-- **`'onPreHandler'`** extension point
-- Route prerequisites
-- Route handler
-- **`'onPostHandler'`** extension point
-    - The response object contained in `request.response` may be modified (but not assigned a new value). To return a different response type
-      (for example, replace an error with an HTML response), return a new response via `next(response)`.
-- Validate response payload
-- **`'onPreResponse'`** extension point
-    - always called.
-    - The response contained in `request.response` may be modified (but not assigned a new value). To return a different response type (for
-      example, replace an error with an HTML response), return a new response via `next(response)`. Note that any errors generated after
-      `next(response)` is called will not be passed back to the `'onPreResponse'` extension method to prevent an infinite loop.
-- Send response (may emit `'internalError'` event)
-- Emits `'response'` event
-- Wait for tails
-- Emits `'tail'` event
+_Available only within the handler method and only before one of `reply()`, `reply.file()`, `reply.view()`,
+`reply.close()`, `reply.proxy()`, or `reply.redirect()` is called._
+
+Transmits a file from the file system. The 'Content-Type' header defaults to the matching mime type based on filename extension.:
+
+- `path` - the file path.
+- `options` - optional settings:
+    - `filename` - an optional filename to specify if sending a 'Content-Disposition' header, defaults to the basename of `path`
+    - `mode` - specifies whether to include the 'Content-Disposition' header with the response. Available values:
+        - `false` - header is not included. This is the default value.
+        - `'attachment'`
+        - `'inline'`
+    - `lookupCompressed` - if `true`, looks for the same filename with the '.gz' suffix for a precompressed version of the file to serve if the request supports content encoding. Defaults to `false`.
+
+No return value.
+
+The [response flow control rules](#flow-control) **do not** apply.
+
+```javascript
+var handler = function (request, reply) {
+
+    reply.file('./hello.txt');
+};
+```

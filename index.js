@@ -3,6 +3,9 @@ var Good = require('good');
 var Data = require('./lib/data');
 var Nodevember = require('./lib');
 
+var HapiAuthCookie = require('hapi-auth-cookie');
+var auth = require('./lib/auth');
+
 var server = new Hapi.Server(8080);
 
 server.views({
@@ -36,16 +39,14 @@ data.start(function (err) {
 
     server.method(methods);
 
-    server.pack.register({ plugin: Good, options: {
-        reporters: [{
-            reporter: require('good-console'),
-            args:[{ log: '*', request: '*' }]
-        }]
-    }}, function (err) {
+    server.pack.register(HapiAuthCookie, function (err) {
 
         if (err) {
-            console.error(err);
+            return console.log('Oh no\'s!', err);
         }
+
+        auth.registerStrategy(server);
+        server.route(auth.routes);
 
         server.pack.register(Nodevember, function (err) {
 

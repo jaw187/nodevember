@@ -3,16 +3,7 @@ var Good = require('good');
 var Data = require('./lib/data');
 var Nodevember = require('./lib');
 
-var HapiAuthCookie = require('hapi-auth-cookie');
-var auth = require('./lib/auth');
-
-
-// Server Options
-var options = {
-    cors: {
-        origin: ['google.com']
-    }
-};
+var Reflektor = require('reflektor');
 
 
 var server = new Hapi.Server(8080);
@@ -48,14 +39,7 @@ data.start(function (err) {
 
     server.method(methods);
 
-    server.pack.register(HapiAuthCookie, function (err) {
-
-        if (err) {
-            return console.log('Oh no\'s!', err);
-        }
-
-        auth.registerStrategy(server);
-        server.route(auth.routes);
+    server.pack.register(Reflektor, function (err) {
 
         server.pack.register(Nodevember, function (err) {
 

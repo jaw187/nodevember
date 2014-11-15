@@ -1,5 +1,6 @@
 ## Websockets
 
+```js
 // The following initializes a socket.io server.
 // The socket.io client JavaScript is located at http://localhost:8000/socket.io/socket.io.js
 // To create a new socket.io handshake make a POST request to http://localhost:8000/socket.io/1
@@ -38,3 +39,4 @@ internals.startServer = function () {
 
 
 internals.startServer();
+```

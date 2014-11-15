@@ -1,6 +1,6 @@
 ## Proxy
 
-- <a name="route.config.proxy"></a>`proxy` - generates a reverse proxy handler with the following options:
+<a name="route.config.proxy"></a>`proxy` - generates a reverse proxy handler with the following options:
         - `host` - the upstream service host to proxy requests to.  The same path on the client request will be used as the path on the host.
         - `port` - the upstream service port.
         - `protocol` - The protocol to use when making a request to the proxied host:

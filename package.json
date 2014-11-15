@@ -4,7 +4,7 @@
   "description": "nodevember ==========",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/.bin/lab",
+    "test": "node node_modules/.bin/lab -c",
     "start": "node index"
   },
   "repository": {

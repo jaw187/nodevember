@@ -1,12 +1,11 @@
 Hello Server
 
-1. npm init
-2. npm install hapi --save
-3. create index.js
-4. require hapi
-5. new Hapi.Server(8080);
-6. add route
-7. start server
+1. npm install hapi --save
+2. create index.js
+3. require hapi
+4. new Hapi.Server(8080);
+5. add route
+6. start server
 
 
 Challenge:

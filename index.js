@@ -1,15 +1,10 @@
 var Hapi = require('hapi');
+var Routes = require('./lib/routes');
 
 var server = new Hapi.Server(8080);
+server.route(Routes);
 
-server.route({
-    method: 'get',
-    path: '/',
-    handler: function (request, reply) {
+server.start(function () {
 
-        reply('Hello Server');
-    }
+    console.log('Served at http://localhost:' + server.info.port);
 });
-
-
-server.start();

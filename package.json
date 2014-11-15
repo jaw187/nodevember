@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/hapijs/nodevember",
   "dependencies": {
-    "hapi": "^7.5.2"
+    "code": "^1.2.1",
+    "hapi": "^7.5.2",
+    "lab": "^5.0.2"
   }
 }

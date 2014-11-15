@@ -1,5 +1,22 @@
-Testing
+## Routing
 
-1. npm install lab code --save
-2. refactor and move route out
-3. write tests
+
+My Sensor Protocol:
+
+```
+node-id;child-sensor-id;message-type;ack;sub-type;payload
+```
+
+
+Translation:
+```
+{
+  radioId,
+  sensorId,
+  sensorType,
+  readings: [{
+    type,
+    value
+  }]
+}
+```

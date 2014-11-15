@@ -6,6 +6,15 @@ var Nodevember = require('./lib');
 var HapiAuthCookie = require('hapi-auth-cookie');
 var auth = require('./lib/auth');
 
+
+// Server Options
+var options = {
+    cors: {
+        origin: ['google.com']
+    }
+};
+
+
 var server = new Hapi.Server(8080);
 
 server.views({

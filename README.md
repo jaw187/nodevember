@@ -1,4 +1,4 @@
-## File handlers
+## Serving files and directories
 
 ### `reply.file(path, [options])`
 

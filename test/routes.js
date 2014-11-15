@@ -11,6 +11,8 @@ var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
 
+Routes.pop(); // Remove / GET due to lack of hapi-auth-cookie in testing
+
 
 describe('routing', function () {
 
